@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: portfolio-backend
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/portfolio}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:yourSecretKeyShouldBeAtLeast256BitsLongToSupportHMACSHA256AuthenticationInSpringSecurity}
+    expiration-ms: ${JWT_EXPIRATION:86400000} # 24 hours
+  supabase:
+    url: ${SUPABASE_URL:}
+    key: ${SUPABASE_KEY:}
+    bucket: ${SUPABASE_BUCKET:portfolio-images}
+  resend:
+    api-key: ${RESEND_API_KEY:}
+    from-email: ${RESEND_FROM_EMAIL:portfolio@resend.dev}
+    to-email: ${ADMIN_EMAIL:your-email@example.com}
+
+server:
+  port: 8080
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
